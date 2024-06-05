@@ -1,13 +1,15 @@
-import streamlit as st
-import markdown2
 import json
+
 import requests
-from sim_prompts import *  # Ensure this import provides the needed functionality
+import streamlit as st
 from bs4 import BeautifulSoup
 from fpdf import FPDF
-from sqlalchemy import create_engine, Column, Integer, String, Text, MetaData, Index
+from sqlalchemy import Column, Index, Integer, MetaData, String, Text, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+
+import markdown2
+from sim_prompts import *  # Ensure this import provides the needed functionality
 
 # Database setup
 DATABASE_URL = "sqlite:///app_data.db"
