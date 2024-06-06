@@ -2,13 +2,12 @@ import streamlit as st
 import markdown2
 import json
 import requests
-from sim_prompts import *  # Ensure this import provides the needed functionality
 from bs4 import BeautifulSoup
 from fpdf import FPDF
 from sqlalchemy import create_engine, Column, Integer, String, Text, MetaData, Index
-# from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, declarative_base
-# from st_pages import show_pages, hide_pages, Page
+
+from sim_prompts import *  # Import the prompts for the simulator
 
 # Database setup
 DATABASE_URL = "sqlite:///app_data.db"  # SQLite database
