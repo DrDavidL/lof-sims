@@ -134,6 +134,8 @@ def init_session():
         st.session_state["retrieved_case"] = ""
     if "retrieved_name" not in st.session_state:
         st.session_state["retrieved_name"] = ""
+    if "case_checklist" not in st.session_state:
+        st.session_state["case_checklist"] = ""
     if "selected_case_id" not in st.session_state:
         st.session_state["selected_case_id"] = -1
 
@@ -312,8 +314,28 @@ if check_password():
                     st.session_state.expanded = False
             
             with col2:
-                st.info("Review and/or edit the case and begin the simulator!")                  
-            
+                st.info("Review and/or edit the case and begin the simulator!")   
+                
+     
+                if st.button("Generate Case Checklist"):
+                    messages = [
+                        {"role": "system", "content": checklist_system_prompt},
+                        {"role": "user", "content": f'case_details: {st.session_state.response_markdown}'}
+                    ]
+                
+
+                    with st.spinner("Assembling Checklist... Please wait."):
+                        response_content = llm_call(model_choice, messages)
+                    st.session_state.case_checklist = response_content['choices'][0]['message']['content']    
+                    
+                    
+                if st.session_state.case_checklist != "":
+                    with col3:
+                        st.success("Case Checklist Generated!")
+                        with st.expander("View Case Checklist", expanded=False):
+                            st.markdown(st.session_state.case_checklist)
+                            st.session_state.expanded = False   
+                      
                 if st.checkbox("Edit Case (Scroll Down)", value=False):
                     with col3:
                         st.session_state.expanded = False
@@ -338,6 +360,17 @@ if check_password():
                         html_to_pdf(case_html, 'case.pdf')
                         with open("case.pdf", "rb") as f:
                             st.download_button("Download Case PDF", f, "case.pdf")
+                            
+                            
+                if st.session_state.case_checklist != "":
+                    checklist_html = markdown2.markdown(st.session_state.case_checklist, extras=["tables"])
+                        # st.download_button('Download HTML Case file', html, f'case.html', 'text/html')
+                        
+                    # st.info("Download the Current Case:")
+                    if st.checkbox("Generate Checklist PDF file"):
+                        html_to_pdf(checklist_html, 'checklist.pdf')
+                        with open("checklist.pdf", "rb") as f:
+                            st.download_button("Download Checklist PDF", f, "checklist.pdf")
 
                 if st.session_state["final_case"] != "":
                     if st.button("Send case to the simulator!"):

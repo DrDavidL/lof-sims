@@ -242,3 +242,4 @@ relevant information that aligns with this context. Then, generate a response to
 followup_system_prompt = """Provide brief additional expert answers to physician users, so no disclaimers, who are asking followup questions for this original 
 question and answer: 
 """
+

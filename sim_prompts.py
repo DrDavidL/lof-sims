@@ -528,3 +528,61 @@ output_format_json = """{
     "case_summary": "This was a case of acute pancreatitis in a middle-aged male who presented with sudden onset of severe, stabbing upper abdominal pain that radiated to the back, accompanied by nausea, vomiting, and fever. The patient’s social history of regular, heavy alcohol use and a high-fat diet, along with the absence of gallstones on imaging, supports the diagnosis of alcohol-related acute pancreatitis.\n\nOn physical examination, findings indicative of pancreatitis include diffuse upper abdominal tenderness with guarding. Significant laboratory findings included elevated white blood cell count, liver function tests, and particularly a significantly elevated lipase level, which is highly suggestive of pancreatitis.\n\nImaging studies further confirmed the diagnosis by revealing a swollen pancreas with peripancreatic fat stranding but no gallstones, which fits the clinical picture of acute pancreatitis.\n\nManagement typically involves hospitalization for fasting, IV fluid hydration, pain control, and monitoring for complications. Addressing the underlying cause, such as alcohol cessation in this case, is also a critical step in management."
   }
   """
+  
+checklist_system_prompt = """Generate a Comprehensive Checklist for Assessing a Medical Student:
+
+You will receive a detailed case history and diagnosis of a patient encounter. Your task is to generate a comprehensive, case-specific assessment list for a student's performance. The checklist should cover
+essential steps, evaluations, and actions required for managing the case, including history taking, physical examination, diagnostic testing, and management plans. Ensure the checklist is thorough and tailored
+to the specifics of the case provided. Use [ ] to indicate checkboxes for each item on the final list for easy grading.
+
+Sample Checklist <tailor to specific case details provided>:
+
+Initiating the Encounter:
+
+[ ] Confirm patient’s identity (greeted patient by the FIRST AND LAST NAME or patient stated name).
+[ ] Ask how the patient prefers to be addressed.
+[ ] Introduce yourself (preferable to use first and last name).
+[ ] Identify your position (e.g., 1st-year medical student).
+[ ] Confirm the reason(s) for the encounter.
+
+History Taking:
+
+[ ] Confirm patient’s demographic information.
+[ ] Elicit detailed history of present illness, including onset, location, duration, character, and associated symptoms.
+[ ] Review past medical history, surgical history, medications, and allergies.
+[ ] Gather relevant social and family history, including lifestyle factors and familial diseases.
+[ ] Identify risk factors pertinent to the patient’s condition.
+
+Physical Examination:
+
+[ ] Conduct a comprehensive physical examination pertinent to the case (e.g., abdominal examination for gastrointestinal cases).
+[ ] Measure and record vital signs (BP, HR, RR, Temp, SpO2).
+[ ] Perform system-specific examinations as indicated by the patient’s history and symptoms (e.g., cardiovascular, respiratory, neurological).
+
+Diagnostic Testing:
+
+[ ] Order appropriate imaging studies (e.g., CT scan, ultrasound) to confirm the diagnosis and assess for complications.
+[ ] Conduct laboratory tests to identify signs of inflammation, infection, or other abnormalities (e.g., CBC, CRP, ESR).
+[ ] Consider additional tests based on differential diagnoses (e.g., colonoscopy for malignancy evaluation if indicated).
+
+Management Plan:
+
+[ ] Develop a treatment plan based on the diagnosis, including medication (e.g., antibiotics), dietary modifications, and symptom management.
+[ ] Educate the patient about the condition, its management, and follow-up care.
+[ ] Consider the need for hospitalization based on severity and patient’s ability to tolerate oral intake.
+[ ] Plan for follow-up visits to monitor the patient’s progress and response to treatment.
+[ ] Address any immediate concerns or complications that arise during the encounter.
+
+Patient Education:
+
+[ ] Provide information about the condition, risk factors, and preventive measures.
+[ ] Discuss lifestyle modifications, including diet and exercise, to reduce recurrence risk.
+[ ] Offer guidance on recognizing signs of complications and when to seek immediate medical attention.
+
+Documentation:
+
+[ ] Ensure all patient interactions, findings, and plans are thoroughly documented in the medical record.
+[ ] Record patient’s consent and understanding of the management plan.
+[ ] Update the patient’s problem list and medication list as needed.
+[ ] Ensure accurate and timely completion of the medical record to support continuity of care.
+"""
