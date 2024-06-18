@@ -369,7 +369,7 @@ if check_password():
                         
                     # st.info("Download the Current Case:")
                     if st.checkbox("Generate Checklist PDF file"):
-                        html_to_pdf(checklist_html, 'checklist.pdf')
+                        html_to_pdf("<h1>Case Checklist</h1>" + checklist_html, 'checklist.pdf')
                         with open("checklist.pdf", "rb") as f:
                             st.download_button("Download Checklist PDF", f, "checklist.pdf")
 
@@ -451,7 +451,7 @@ if check_password():
                             st.session_state.final_case = updated_retrieved_case
                             st.info("Case Edits Saved!")   
                             updated_case_html = markdown2.markdown(st.session_state.final_case, extras=["tables"])
-                            html_to_pdf(updated_case_html, 'updated_case.pdf')
+                            html_to_pdf("<h1>Updated Case</h1>" + updated_case_html, 'updated_case.pdf')
                             with open("updated_case.pdf", "rb") as f:
                                 st.download_button("Download Updated Case PDF", f, "updated_case.pdf")
                             if make_new_entry:
